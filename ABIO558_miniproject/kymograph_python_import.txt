@@ -1,0 +1,47 @@
+# Import Sci libralies
+import numpy as np
+import matplotlib.pyplot as plt
+import os
+import seaborn as sns
+from skimage import filters, measure
+from skimage.io import imread
+
+# Set working directory
+working_directory = "/Users/pattanaikonpetch/Desktop/ABIO558_miniproject"
+input = os.path.join(working_directory, "kymographs")
+output = os.path.join(working_directory, "output")
+
+# Make output directory
+os.makedirs(output, exist_ok=True)
+
+# Store loaded kymograph input
+kymograph = {}
+
+# Loop to work on all file in working directory
+#      Looping only for tif file inout
+for file_name in sorted(os.listdir(input)):
+		 if file_name.lower().endswith((".tif", ".tiff")):
+		    continue
+		    # Find baseline name for kymograph input directory
+                    baseline_name = os.path.splitext(file_name)[0]
+		    # Make a output directory following from the baseline name in input directory
+		    file_output_directory = os.path.join(output_directory, baseline_name)
+		    os.makedirs(file_output_directory, exist_ok=True)
+		    # Import all file in input directory
+		    kymo = imread(os.path.join(input_directory, file_name))
+		    kymographs[baseline_name] = kymo
+		    # Preview image of each kymograph
+		    fig, ax = plt.subplots(figsize=(3, 6))
+		    ax.set_title(baseline_name)
+		    ax.set_xlabel("Position (px)")
+		    ax.set_ylabel("Time (frames)")
+		    fig.tight_layout()
+		    plt.close(fig)
+
+# Print loaded kymograph input
+print(f"Loaded {len(kymographs)} kymographs from {input_directory}")
+		    
+		    
+		    
+
+
